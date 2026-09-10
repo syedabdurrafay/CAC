@@ -1,15 +1,11 @@
 import type { NextConfig } from "next";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import path from "path";
 
 const nextConfig: NextConfig = {
   // Pin Turbopack's workspace root to this project folder so it stops
-  // scanning upward into C:\Users\Admin and warning about a stray lockfile.
+  // scanning upward and warning about a stray lockfile outside the repo.
   turbopack: {
-    root: __dirname,
+    root: path.resolve(process.cwd()),
   },
 
   images: {
