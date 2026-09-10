@@ -85,7 +85,7 @@ export function Hero() {
   const cardRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
   const pointerRef = useRef({ x: 0, y: 0 });
 
   // --- 3D tilt on mouse move (card) ---
@@ -143,19 +143,24 @@ export function Hero() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Assign to non-null local constants so TS narrowing persists inside closures
+    const canvasEl: HTMLCanvasElement = canvas;
+    const sectionEl: HTMLElement = section;
+    const ctx2d: CanvasRenderingContext2D = ctx;
+
     let width = 0;
     let height = 0;
     let frame = 0;
 
     function resize() {
-      const rect = section.getBoundingClientRect();
+      const rect = sectionEl.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvasEl.width = width * dpr;
+      canvasEl.height = height * dpr;
+      canvasEl.style.width = `${width}px`;
+      canvasEl.style.height = `${height}px`;
+      ctx2d.setTransform(dpr, 0, 0, dpr, 0, 0);
       initParticles(width, height);
     }
 
@@ -163,22 +168,22 @@ export function Hero() {
     window.addEventListener("resize", resize);
 
     function onPointerMove(e: PointerEvent) {
-      const rect = section.getBoundingClientRect();
+      const rect = sectionEl.getBoundingClientRect();
       pointerRef.current.x = (e.clientX - rect.left) / rect.width - 0.5;
       pointerRef.current.y = (e.clientY - rect.top) / rect.height - 0.5;
     }
-    section.addEventListener("pointermove", onPointerMove);
+    sectionEl.addEventListener("pointermove", onPointerMove);
 
     function tick() {
       frame++;
-      ctx.clearRect(0, 0, width, height);
+      ctx2d.clearRect(0, 0, width, height);
 
       const particles = particlesRef.current;
       const px = pointerRef.current.x;
       const py = pointerRef.current.y;
 
       // constellation links, drawn behind the particles
-      ctx.lineWidth = 1;
+      ctx2d.lineWidth = 1;
       for (let i = 0; i < particles.length; i++) {
         const a = particles[i];
         for (let j = i + 1; j < particles.length; j++) {
@@ -190,11 +195,11 @@ export function Hero() {
           if (dist < maxDist) {
             const alpha = (1 - dist / maxDist) * 0.12 * Math.min(a.z, b.z);
             if (alpha > 0.005) {
-              ctx.strokeStyle = `rgba(17,17,17,${alpha})`;
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.stroke();
+              ctx2d.strokeStyle = `rgba(17,17,17,${alpha})`;
+              ctx2d.beginPath();
+              ctx2d.moveTo(a.x, a.y);
+              ctx2d.lineTo(b.x, b.y);
+              ctx2d.stroke();
             }
           }
         }
@@ -223,17 +228,17 @@ export function Hero() {
 
         const alpha = p.isNode ? 0.35 * p.z : 0.85;
 
-        ctx.beginPath();
-        ctx.fillStyle = `rgba(17,17,17,${alpha})`;
-        ctx.arc(drawX, drawY, p.r, 0, Math.PI * 2);
-        ctx.fill();
+        ctx2d.beginPath();
+        ctx2d.fillStyle = `rgba(17,17,17,${alpha})`;
+        ctx2d.arc(drawX, drawY, p.r, 0, Math.PI * 2);
+        ctx2d.fill();
 
         if (!p.isNode) {
           // soft glow on the growth-curve particles
-          ctx.beginPath();
-          ctx.fillStyle = `rgba(17,17,17,${alpha * 0.12})`;
-          ctx.arc(drawX, drawY, p.r * 3.2, 0, Math.PI * 2);
-          ctx.fill();
+          ctx2d.beginPath();
+          ctx2d.fillStyle = `rgba(17,17,17,${alpha * 0.12})`;
+          ctx2d.arc(drawX, drawY, p.r * 3.2, 0, Math.PI * 2);
+          ctx2d.fill();
         }
       }
 
@@ -244,7 +249,7 @@ export function Hero() {
 
     return () => {
       window.removeEventListener("resize", resize);
-      section.removeEventListener("pointermove", onPointerMove);
+      sectionEl.removeEventListener("pointermove", onPointerMove);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [initParticles, shouldReduceMotion]);
