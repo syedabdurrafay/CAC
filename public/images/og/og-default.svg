@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#14151A"/>
+<path d="M100 500L500 100M500 100H260M500 100V340" stroke="#3644FF" stroke-width="10" stroke-linecap="square"/>
+<text x="100" y="560" font-family="Arial, sans-serif" font-size="52" fill="#F6F5F1" font-weight="700">Northfield</text>
+<text x="100" y="600" font-family="Arial, sans-serif" font-size="26" fill="#F6F5F1" fill-opacity="0.6">Growth engineering for ambitious brands</text>
+</svg>
