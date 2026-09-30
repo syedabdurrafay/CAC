@@ -22,39 +22,39 @@ export default function ContactPage() {
       <section className="py-16 md:py-20">
         <Container className="grid grid-cols-1 gap-14 md:grid-cols-12">
           <div className="md:col-span-4">
-            <h2 className="font-display text-xl font-medium text-ink">
+            <h2 className="font-display text-xl font-medium text-fg">
               Other ways to reach us
             </h2>
             <ul className="mt-6 space-y-5">
               <li className="flex items-start gap-3">
-                <Mail size={18} className="mt-0.5 shrink-0 text-current" />
+                <Mail size={18} className="mt-0.5 shrink-0 text-accent" />
                 <div>
-                  <p className="text-sm font-medium text-ink">Email</p>
+                  <p className="text-sm font-medium text-fg">Email</p>
                   <a
                     href={`mailto:${siteConfig.contact.email}`}
-                    className="text-sm text-ink-soft/75 hover:text-current"
+                    className="text-sm text-fg-soft/75 hover:text-accent"
                   >
                     {siteConfig.contact.email}
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <Phone size={18} className="mt-0.5 shrink-0 text-current" />
+                <Phone size={18} className="mt-0.5 shrink-0 text-accent" />
                 <div>
-                  <p className="text-sm font-medium text-ink">Phone</p>
+                  <p className="text-sm font-medium text-fg">Phone</p>
                   <a
                     href={`tel:${siteConfig.contact.phone}`}
-                    className="text-sm text-ink-soft/75 hover:text-current"
+                    className="text-sm text-fg-soft/75 hover:text-accent"
                   >
                     {siteConfig.contact.phone}
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin size={18} className="mt-0.5 shrink-0 text-current" />
+                <MapPin size={18} className="mt-0.5 shrink-0 text-accent" />
                 <div>
-                  <p className="text-sm font-medium text-ink">Office</p>
-                  <p className="text-sm text-ink-soft/75">
+                  <p className="text-sm font-medium text-fg">Office</p>
+                  <p className="text-sm text-fg-soft/75">
                     {siteConfig.contact.addressLine1}
                     <br />
                     {siteConfig.contact.addressLine2}

@@ -9,6 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/Button";
 
@@ -191,11 +192,11 @@ export function Hero() {
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const maxDist = 70;
+          const maxDist = 90;
           if (dist < maxDist) {
-            const alpha = (1 - dist / maxDist) * 0.12 * Math.min(a.z, b.z);
+            const alpha = (1 - dist / maxDist) * 0.3 * Math.min(a.z, b.z);
             if (alpha > 0.005) {
-              ctx2d.strokeStyle = `rgba(17,17,17,${alpha})`;
+              ctx2d.strokeStyle = `rgba(25,211,232,${alpha})`;
               ctx2d.beginPath();
               ctx2d.moveTo(a.x, a.y);
               ctx2d.lineTo(b.x, b.y);
@@ -229,7 +230,7 @@ export function Hero() {
         const alpha = p.isNode ? 0.35 * p.z : 0.85;
 
         ctx2d.beginPath();
-        ctx2d.fillStyle = `rgba(17,17,17,${alpha})`;
+        ctx2d.fillStyle = `rgba(25,211,232,${alpha})`;
         ctx2d.arc(drawX, drawY, p.r, 0, Math.PI * 2);
         ctx2d.fill();
 
@@ -254,105 +255,126 @@ export function Hero() {
     };
   }, [initParticles, shouldReduceMotion]);
 
+  const ease = [0.16, 1, 0.3, 1] as const;
+  const fade = (delay: number) => ({
+    initial: shouldReduceMotion ? undefined : { opacity: 0, y: 20 },
+    animate: shouldReduceMotion ? undefined : { opacity: 1, y: 0 },
+    transition: { duration: 0.7, delay, ease },
+  });
+
   return (
     <section className="relative overflow-hidden border-b border-line">
       {/* Particle field: ascending growth curve + network constellation */}
       <canvas
         ref={canvasRef}
-        className="pointer-events-none absolute inset-0 z-0 opacity-70"
+        className="pointer-events-none absolute inset-0 z-0 opacity-50 md:opacity-80"
         aria-hidden="true"
       />
 
-      <Container className="relative z-10 grid grid-cols-1 gap-12 py-16 md:grid-cols-12 md:gap-8 md:py-24 lg:py-32">
-        <div className="md:col-span-7 lg:col-span-7">
-          <motion.h1
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 20 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-balance text-5xl font-medium leading-[0.98] tracking-tight text-ink sm:text-6xl md:text-7xl"
+      <Container className="relative z-10 grid grid-cols-1 items-center gap-14 py-16 md:grid-cols-12 md:gap-8 md:py-24 lg:py-32">
+        <div className="md:col-span-7">
+          <motion.p
+            {...fade(0)}
+            className="hud-label inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-4 py-1.5 text-accent"
           >
-            Marketing that behaves like engineering.
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+            </span>
+            RoveTech // Systems online
+          </motion.p>
+
+          <motion.h1
+            {...fade(0.08)}
+            className="font-display mt-7 text-balance text-5xl font-medium leading-[0.98] tracking-tight text-fg sm:text-6xl md:text-7xl"
+          >
+            Marketing that behaves like <span className="text-neon">engineering.</span>
           </motion.h1>
 
           <motion.p
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 20 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 max-w-lg text-lg leading-relaxed text-ink-soft/80"
+            {...fade(0.16)}
+            className="mt-6 max-w-lg text-lg leading-relaxed text-fg-soft"
           >
-            Northfield builds the search, paid, and owned media systems that
+            RoveTech builds the search, paid, and owned media systems that
             take a brand from unknown to unavoidable — measured in revenue,
             not impressions.
           </motion.p>
 
-          <motion.div
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 20 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-10 flex flex-wrap items-center gap-4"
-          >
+          <motion.div {...fade(0.24)} className="mt-10 flex flex-wrap items-center gap-4">
             <ButtonLink href="/contact">Start a project</ButtonLink>
             <ButtonLink href="/services" variant="secondary">
               Explore our services
               <ArrowUpRight size={16} />
             </ButtonLink>
           </motion.div>
+
+          <motion.dl
+            {...fade(0.32)}
+            className="hud-label mt-14 grid max-w-md grid-cols-3 gap-6 text-fg-soft"
+          >
+            {[
+              ["Uptime", "99.99%"],
+              ["Signal", "Real-time"],
+              ["Mode", "Autonomous"],
+            ].map(([k, v]) => (
+              <div key={k} className="border-l border-accent/40 pl-3">
+                <dt className="text-fg-soft/60">{k}</dt>
+                <dd className="mt-1 text-accent">{v}</dd>
+              </div>
+            ))}
+          </motion.dl>
         </div>
 
-        <div
-          className="relative md:col-span-5 lg:col-span-5"
-          style={{ perspective: 1200 }}
-        >
+        <div className="relative md:col-span-5" style={{ perspective: 1200 }}>
+          {/* Orbit rings + floating brand symbol */}
+          <div className="pointer-events-none absolute -right-4 -top-36 z-20 hidden h-44 w-44 items-center justify-center sm:flex">
+            <svg className="animate-spin-slow absolute inset-0" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+              <circle cx="100" cy="100" r="96" stroke="rgba(25,211,232,0.35)" strokeDasharray="2 8" />
+              <circle cx="100" cy="4" r="3.5" fill="#19d3e8" />
+            </svg>
+            <svg className="animate-spin-rev absolute inset-3" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+              <circle cx="100" cy="100" r="96" stroke="rgba(127,234,242,0.25)" />
+              <circle cx="196" cy="100" r="3" fill="#7feaf2" />
+            </svg>
+            <Image
+              src="/brand/logo-mark.png"
+              alt=""
+              width={606}
+              height={413}
+              className="animate-float relative w-24 drop-shadow-[0_0_18px_rgba(25,211,232,0.7)]"
+            />
+          </div>
+
           <motion.div
             ref={cardRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             initial={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.96 }}
-            animate={
-              shouldReduceMotion
-                ? undefined
-                : {
-                    opacity: 1,
-                    scale: 1,
-                    y: [0, -6, 0],
-                  }
-            }
-            transition={{
-              opacity: { duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] },
-              scale: { duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] },
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 },
-            }}
+            animate={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.15, ease }}
             style={{
               rotateX: shouldReduceMotion ? 0 : rotateX,
               rotateY: shouldReduceMotion ? 0 : rotateY,
               transformStyle: "preserve-3d",
             }}
-            className="flex h-full min-h-[320px] flex-col justify-between rounded-[var(--radius-md)] border border-line bg-white/95 p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] backdrop-blur-sm transition-shadow duration-300 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]"
+            className="hud flex h-full min-h-[340px] flex-col justify-between rounded-[var(--radius-md)] border border-line-bright p-6 shadow-[0_0_60px_-20px_rgba(25,211,232,0.35)]"
           >
-            <div
-              className="flex items-center justify-between"
-              style={{ transform: "translateZ(30px)" }}
-            >
-              <span className="text-xs font-medium text-ink-soft/60">
-                Trailing 90 days, blended
-              </span>
-              <span className="relative flex items-center gap-1.5 rounded-[var(--radius-sm)] bg-current-dim px-2 py-1 text-xs font-medium text-current">
+            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[var(--radius-md)]" aria-hidden="true">
+              <span className="scanline" />
+            </div>
+            <div className="flex items-center justify-between" style={{ transform: "translateZ(30px)" }}>
+              <span className="hud-label text-fg-soft">Trailing 90 days · blended</span>
+              <span className="hud-label flex items-center gap-1.5 rounded-full bg-accent/10 px-2.5 py-1 text-accent">
                 <motion.span
-                  className="relative flex h-1.5 w-1.5"
-                  animate={shouldReduceMotion ? undefined : { opacity: [1, 0.4, 1] }}
+                  className="h-1.5 w-1.5 rounded-full bg-accent"
+                  animate={shouldReduceMotion ? undefined : { opacity: [1, 0.3, 1] }}
                   transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-current" />
-                </motion.span>
+                />
                 Live
               </span>
             </div>
 
-            {/* Animated line chart */}
-            <div
-              className="relative mt-8 flex-1"
-              style={{ transform: "translateZ(20px)" }}
-            >
+            <div className="relative mt-8 flex-1" style={{ transform: "translateZ(20px)" }}>
               <svg
                 viewBox="0 0 520 280"
                 fill="none"
@@ -362,69 +384,37 @@ export function Hero() {
                 role="img"
                 aria-label="Chart showing blended marketing performance trending upward over the trailing 90 days"
               >
-                {/* Grid lines */}
+                <defs>
+                  <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#19d3e8" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#19d3e8" stopOpacity="0" />
+                  </linearGradient>
+                  <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="#0a6f86" />
+                    <stop offset="100%" stopColor="#7feaf2" />
+                  </linearGradient>
+                </defs>
+
                 {[
                   { y: 40, label: "$400k" },
                   { y: 100, label: "$300k" },
                   { y: 160, label: "$200k" },
-                ].map((line, i) => (
-                  <motion.line
-                    key={line.y}
-                    x1="40"
-                    y1={line.y}
-                    x2="480"
-                    y2={line.y}
-                    stroke="#E5E7EB"
-                    strokeDasharray="4 4"
-                    strokeWidth="1"
-                    initial={shouldReduceMotion ? undefined : { opacity: 0 }}
-                    animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
-                  />
-                ))}
-                <motion.line
-                  x1="40"
-                  y1="220"
-                  x2="480"
-                  y2="220"
-                  stroke="#E5E7EB"
-                  strokeWidth="1"
-                  initial={shouldReduceMotion ? undefined : { opacity: 0 }}
-                  animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                />
-
-                {/* Axis labels */}
-                {[
-                  { y: 44, label: "$400k" },
-                  { y: 104, label: "$300k" },
-                  { y: 164, label: "$200k" },
-                  { y: 224, label: "$100k" },
-                ].map((axis, i) => (
-                  <motion.text
-                    key={axis.label}
-                    x="30"
-                    y={axis.y}
-                    fill="#9CA3AF"
-                    fontFamily="sans-serif"
-                    fontSize="10"
-                    textAnchor="end"
-                    initial={shouldReduceMotion ? undefined : { opacity: 0 }}
-                    animate={shouldReduceMotion ? undefined : { opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.4 + i * 0.08 }}
-                  >
-                    {axis.label}
-                  </motion.text>
+                  { y: 220, label: "$100k" },
+                ].map((g, i) => (
+                  <g key={g.label}>
+                    <motion.line
+                      x1="40" y1={g.y} x2="480" y2={g.y}
+                      stroke="rgba(25,211,232,0.18)" strokeDasharray="3 6" strokeWidth="1"
+                      initial={shouldReduceMotion ? undefined : { opacity: 0 }}
+                      animate={shouldReduceMotion ? undefined : { opacity: 1 }}
+                      transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
+                    />
+                    <text x="30" y={g.y + 4} fill="#5f8797" fontFamily="monospace" fontSize="10" textAnchor="end">
+                      {g.label}
+                    </text>
+                  </g>
                 ))}
 
-                <defs>
-                  <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#111111" stopOpacity="0.15" />
-                    <stop offset="100%" stopColor="#111111" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-
-                {/* Gradient fill under the curve */}
                 <motion.path
                   d="M50 200 C 120 180, 180 130, 250 110 C 320 90, 390 60, 470 45 L 470 220 L 50 220 Z"
                   fill="url(#chartGradient)"
@@ -432,49 +422,28 @@ export function Hero() {
                   animate={shouldReduceMotion ? undefined : { opacity: 1 }}
                   transition={{ duration: 0.8, delay: 1.4 }}
                 />
-
-                {/* Main performance curve, drawn on */}
                 <motion.path
                   d="M50 200 C 120 180, 180 130, 250 110 C 320 90, 390 60, 470 45"
-                  stroke="#111111"
-                  strokeWidth="2.5"
+                  stroke="url(#lineGradient)"
+                  strokeWidth="3"
                   strokeLinecap="round"
                   fill="none"
+                  style={{ filter: "drop-shadow(0 0 6px rgba(25,211,232,0.8))" }}
                   initial={shouldReduceMotion ? undefined : { pathLength: 0, opacity: 0 }}
                   animate={shouldReduceMotion ? undefined : { pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 1.4, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 1.4, delay: 0.7, ease }}
                 />
-
-                {/* Live data node */}
                 <motion.circle
-                  cx="470"
-                  cy="45"
-                  r="4"
-                  fill="#111111"
+                  cx="470" cy="45" r="5" fill="#7feaf2"
                   initial={shouldReduceMotion ? undefined : { scale: 0, opacity: 0 }}
                   animate={shouldReduceMotion ? undefined : { scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.4, delay: 2.1, ease }}
                 />
                 <motion.circle
-                  cx="470"
-                  cy="45"
-                  r="8"
-                  stroke="#111111"
-                  strokeOpacity="0.3"
-                  strokeWidth="2"
-                  fill="none"
+                  cx="470" cy="45" r="9" stroke="#19d3e8" strokeOpacity="0.5" strokeWidth="2" fill="none"
                   initial={shouldReduceMotion ? undefined : { scale: 0.6, opacity: 0 }}
-                  animate={
-                    shouldReduceMotion
-                      ? undefined
-                      : { scale: [0.6, 1.6, 0.6], opacity: [0, 0.5, 0] }
-                  }
-                  transition={{
-                    duration: 2,
-                    delay: 2.3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                  animate={shouldReduceMotion ? undefined : { scale: [0.6, 1.8, 0.6], opacity: [0, 0.6, 0] }}
+                  transition={{ duration: 2, delay: 2.3, repeat: Infinity, ease: "easeInOut" }}
                 />
               </svg>
             </div>
@@ -484,12 +453,12 @@ export function Hero() {
               style={{ transform: "translateZ(30px)" }}
             >
               <div>
-                <p className="font-display text-2xl font-medium text-ink">3</p>
-                <p className="text-xs text-ink-soft/60">Media disciplines, one team</p>
+                <p className="text-neon font-display text-2xl font-medium">3</p>
+                <p className="hud-label mt-1 text-fg-soft/70">Media disciplines</p>
               </div>
               <div>
-                <p className="font-display text-2xl font-medium text-ink">1</p>
-                <p className="text-xs text-ink-soft/60">Point of contact, always</p>
+                <p className="text-neon font-display text-2xl font-medium">1</p>
+                <p className="hud-label mt-1 text-fg-soft/70">Point of contact</p>
               </div>
             </div>
           </motion.div>

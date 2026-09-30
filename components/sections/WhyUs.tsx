@@ -30,7 +30,7 @@ export function WhyUs() {
     <section className="border-b border-line py-20 md:py-28">
       <Container>
         <SectionHeading
-          title="Why teams choose Northfield."
+          title="Why teams choose RoveTech."
           description="A smaller list of reasons than most agencies give you — because we'd rather be specific than exhaustive."
         />
 
@@ -38,10 +38,10 @@ export function WhyUs() {
           {reasons.map((reason, i) => (
             <Reveal key={reason.title} delay={i * 0.06}>
               <div>
-                <h3 className="font-display text-xl font-medium text-ink">
+                <h3 className="font-display text-xl font-medium text-fg">
                   {reason.title}
                 </h3>
-                <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-soft/75">
+                <p className="mt-2 max-w-md text-sm leading-relaxed text-fg-soft/75">
                   {reason.description}
                 </p>
               </div>

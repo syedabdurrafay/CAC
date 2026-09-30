@@ -13,7 +13,7 @@ export function TrustSection() {
       <Container>
         <p
           id="trust-heading"
-          className="text-center text-sm text-ink-soft/60"
+          className="hud-label text-center text-fg-soft"
         >
           Trusted across industries
         </p>
@@ -27,8 +27,8 @@ export function TrustSection() {
               aria-hidden={i >= siteConfig.industriesServed.length}
               className="
                 flex shrink-0 items-center justify-center
-                rounded-[var(--radius-sm)] border border-line
-                px-6 py-4 text-sm font-medium text-ink-soft/70
+                rounded-full border border-line-bright bg-surface/60
+                px-6 py-3 text-sm font-medium text-fg-soft
                 whitespace-nowrap
               "
             >

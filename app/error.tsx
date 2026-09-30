@@ -18,11 +18,11 @@ export default function Error({
   return (
     <section className="flex min-h-[70vh] items-center py-16">
       <Container className="text-center">
-        <p className="font-display text-sm font-medium text-current">Error</p>
-        <h1 className="font-display mt-3 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+        <p className="font-display text-sm font-medium text-accent">Error</p>
+        <h1 className="font-display mt-3 text-4xl font-medium tracking-tight text-fg sm:text-5xl">
           Something went wrong.
         </h1>
-        <p className="mx-auto mt-4 max-w-md text-ink-soft/75">
+        <p className="mx-auto mt-4 max-w-md text-fg-soft/75">
           We hit an unexpected error loading this page. You can try again, or
           head back to the homepage.
         </p>

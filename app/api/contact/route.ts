@@ -51,8 +51,8 @@ async function deliverSubmission(submission: ContactSubmission) {
   // import { Resend } from "resend";
   // const resend = new Resend(process.env.RESEND_API_KEY);
   // await resend.emails.send({
-  //   from: "Northfield Website <noreply@yourdomain.com>",
-  //   to: process.env.CONTACT_EMAIL_TO ?? "hello@northfield.agency",
+  //   from: "RoveTech Website <noreply@yourdomain.com>",
+  //   to: process.env.CONTACT_EMAIL_TO ?? "hello@rovetech.com",
   //   subject: `New project inquiry from ${submission.name}`,
   //   text: JSON.stringify(submission, null, 2),
   // });

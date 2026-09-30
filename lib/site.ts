@@ -12,17 +12,17 @@
  */
 
 export const siteConfig = {
-  name: "Northfield",
-  legalName: "Northfield Digital Ltd.",
+  name: "RoveTech",
+  legalName: "RoveTech", // TODO: replace with your registered legal company name
   tagline: "Growth engineering for ambitious brands",
   description:
-    "Northfield is a digital growth agency. We combine search, paid media, and product-grade websites into one system that turns attention into revenue.",
-  url: "https://www.northfield.agency", // TODO: replace with live domain
+    "RoveTech is a digital growth agency. We combine search, paid media, and product-grade websites into one system that turns attention into revenue.",
+  url: "https://www.rovetech.com", // TODO: replace with live domain
   founded: 2021,
 
   // TODO: replace with real contact details before launch
   contact: {
-    email: "hello@northfield.agency",
+    email: "hello@rovetech.com",
     phone: "+1 (555) 010-2044",
     addressLine1: "148 Lafayette Street, Suite 4B",
     addressLine2: "New York, NY 10013",
@@ -30,9 +30,9 @@ export const siteConfig = {
 
   // TODO: replace with real, live social profiles
   socials: {
-    linkedin: "https://www.linkedin.com/company/northfield-agency",
-    instagram: "https://www.instagram.com/northfield.agency",
-    x: "https://x.com/northfieldhq",
+    linkedin: "https://www.linkedin.com/company/rovetech",
+    instagram: "https://www.instagram.com/rovetech",
+    x: "https://x.com/rovetech",
   },
 
   // Headline stats shown on the homepage trust section.

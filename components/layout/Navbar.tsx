@@ -16,9 +16,10 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur">
+    <>
+    <header className="sticky top-0 z-50 border-b border-line bg-void/60 backdrop-blur-xl">
       <Container className="flex h-16 items-center justify-between md:h-20">
-        <Logo />
+        <Logo size={38} />
 
         <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
           {mainNav.map((item) =>
@@ -30,7 +31,7 @@ export function Navbar() {
                 onMouseLeave={() => setServicesOpen(false)}
               >
                 <button
-                  className="flex items-center gap-1 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+                  className="flex items-center gap-1 text-sm font-medium text-fg-soft transition-colors hover:text-accent"
                   aria-expanded={servicesOpen}
                   aria-haspopup="true"
                   onClick={() => setServicesOpen((v) => !v)}
@@ -51,10 +52,10 @@ export function Navbar() {
                       transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
                       className="absolute left-1/2 top-full w-[720px] -translate-x-1/2 pt-4"
                     >
-                      <div className="grid grid-cols-3 gap-8 rounded-[var(--radius-md)] border border-line bg-white p-8 shadow-[0_20px_60px_-20px_rgba(20,21,26,0.25)]">
+                      <div className="grid grid-cols-3 gap-8 rounded-[var(--radius-md)] border border-line-bright bg-surface/95 p-8 shadow-[0_30px_80px_-20px_rgba(25,211,232,0.25)] backdrop-blur-xl">
                         {serviceCategories.map((cat) => (
                           <div key={cat.name}>
-                            <p className="mb-3 text-xs font-medium text-ink/50">
+                            <p className="hud-label mb-3 text-accent/80">
                               {cat.name}
                             </p>
                             <ul className="space-y-2.5">
@@ -62,7 +63,7 @@ export function Navbar() {
                                 <li key={service.slug}>
                                   <Link
                                     href={`/services/${service.slug}`}
-                                    className="text-sm text-ink-soft transition-colors hover:text-current"
+                                    className="text-sm text-fg-soft transition-colors hover:text-accent"
                                     onClick={() => setServicesOpen(false)}
                                   >
                                     {service.title}
@@ -81,7 +82,7 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+                className="text-sm font-medium text-fg-soft transition-colors hover:text-accent"
               >
                 {item.label}
               </Link>
@@ -103,8 +104,9 @@ export function Navbar() {
           <Menu size={22} />
         </button>
       </Container>
-
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </header>
+    {/* Rendered outside <header>: its backdrop-filter would otherwise trap the fixed overlay */}
+    <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+    </>
   );
 }

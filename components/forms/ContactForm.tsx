@@ -98,16 +98,16 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="flex flex-col items-start gap-3 rounded-[var(--radius-md)] border border-line bg-white p-8"
+        className="flex flex-col items-start gap-3 hud rounded-[var(--radius-md)] border border-line bg-surface p-8"
       >
-        <CheckCircle2 size={28} className="text-current" />
-        <h3 className="font-display text-xl font-medium text-ink">
+        <CheckCircle2 size={28} className="text-accent" />
+        <h3 className="font-display text-xl font-medium text-fg">
           Thanks — we&apos;ve got it.
         </h3>
-        <p className="text-sm leading-relaxed text-ink-soft/75">
+        <p className="text-sm leading-relaxed text-fg-soft/75">
           A member of our team will reply within one business day. In the
           meantime, feel free to explore our{" "}
-          <Link href="/work" className="underline underline-offset-2 hover:text-current">
+          <Link href="/work" className="underline underline-offset-2 hover:text-accent">
             recent work
           </Link>
           .
@@ -212,7 +212,7 @@ export function ContactForm() {
       </div>
 
       <fieldset>
-        <legend className="mb-3 text-sm font-medium text-ink">
+        <legend className="mb-3 text-sm font-medium text-fg">
           Services you&apos;re interested in
         </legend>
         <div className="flex flex-wrap gap-2">
@@ -226,8 +226,8 @@ export function ContactForm() {
                 aria-pressed={active}
                 className={`rounded-[var(--radius-sm)] border px-3 py-1.5 text-xs font-medium transition-colors ${
                   active
-                    ? "border-ink bg-ink text-paper"
-                    : "border-ink/20 text-ink-soft hover:border-ink/50"
+                    ? "border-accent bg-accent/15 text-accent shadow-[0_0_16px_rgba(25,211,232,0.25)]"
+                    : "border-line-bright text-fg-soft hover:border-accent/60 hover:text-fg"
                 }`}
               >
                 {service.title}
@@ -253,7 +253,7 @@ export function ContactForm() {
       {status === "error" && (
         <div
           role="alert"
-          className="flex items-start gap-2 rounded-[var(--radius-sm)] border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700"
+          className="flex items-start gap-2 rounded-[var(--radius-sm)] border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-red-300"
         >
           <AlertCircle size={16} className="mt-0.5 shrink-0" />
           <span>
@@ -286,12 +286,12 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="mb-1.5 block text-sm font-medium text-ink">
-        {label} {required && <span className="text-current">*</span>}
+      <label htmlFor={htmlFor} className="mb-1.5 block text-sm font-medium text-fg">
+        {label} {required && <span className="text-accent">*</span>}
       </label>
       {children}
       {error && (
-        <p id={`${htmlFor}-error`} className="mt-1.5 text-xs text-red-600">
+        <p id={`${htmlFor}-error`} className="mt-1.5 text-xs text-red-400">
           {error}
         </p>
       )}
@@ -300,7 +300,7 @@ function Field({
 }
 
 function inputClass(hasError: boolean) {
-  return `w-full rounded-[var(--radius-sm)] border bg-white px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-current ${
-    hasError ? "border-red-400" : "border-line"
+  return `w-full rounded-[var(--radius-sm)] border bg-surface px-3.5 py-2.5 text-sm text-fg outline-none transition-colors focus:border-accent focus:shadow-[0_0_0_3px_rgba(25,211,232,0.15)] ${
+    hasError ? "border-red-400/60" : "border-line-bright"
   }`;
 }

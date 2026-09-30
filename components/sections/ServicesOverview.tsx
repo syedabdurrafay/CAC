@@ -27,12 +27,12 @@ export function ServicesOverview() {
             const catServices = getServicesByCategory(category.name);
             return (
               <Reveal key={category.name} delay={i * 0.08}>
-                <div className="flex h-full flex-col rounded-[var(--radius-md)] border border-line bg-white p-7">
-                  <Icon size={22} className="text-current" />
-                  <h3 className="font-display mt-5 text-xl font-medium text-ink">
+                <div className="flex h-full flex-col hud rounded-[var(--radius-md)] border border-line bg-surface p-7">
+                  <Icon size={22} className="text-accent" />
+                  <h3 className="font-display mt-5 text-xl font-medium text-fg">
                     {category.name}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-soft/75">
+                  <p className="mt-2 text-sm leading-relaxed text-fg-soft/75">
                     {category.description}
                   </p>
 
@@ -41,7 +41,7 @@ export function ServicesOverview() {
                       <li key={service.slug}>
                         <Link
                           href={`/services/${service.slug}`}
-                          className="text-sm text-ink-soft transition-colors hover:text-current"
+                          className="text-sm text-fg-soft transition-colors hover:text-accent"
                         >
                           {service.title}
                         </Link>
@@ -51,7 +51,7 @@ export function ServicesOverview() {
 
                   <Link
                     href="/services"
-                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors hover:text-current"
+                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-fg transition-colors hover:text-accent"
                   >
                     View all services
                     <ArrowUpRight size={15} />

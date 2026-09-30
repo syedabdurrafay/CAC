@@ -7,7 +7,7 @@ import { team } from "@/lib/team";
 
 export const metadata: Metadata = {
   title: "Team",
-  description: "Meet the founders behind Northfield.",
+  description: "Meet the founders behind RoveTech.",
 };
 
 export default function TeamPage() {
@@ -29,7 +29,7 @@ export default function TeamPage() {
       </section>
       <section className="border-t border-line py-16 md:py-20">
         <Container className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <h2 className="font-display max-w-xl text-balance text-3xl font-medium leading-tight text-ink sm:text-4xl">
+          <h2 className="font-display max-w-xl text-balance text-3xl font-medium leading-tight text-fg sm:text-4xl">
             Want to work with us directly?
           </h2>
           <ButtonLink href="/contact" className="shrink-0">

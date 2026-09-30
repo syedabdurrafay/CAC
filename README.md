@@ -1,11 +1,18 @@
-# Northfield — Digital Growth Agency Website
+# RoveTech — Digital Growth Agency Website
 
-A production-ready marketing website for Northfield, a digital growth agency
+A production-ready marketing website for RoveTech, a digital growth agency
 founded by Syed Rafay, Ammar Nadeem, Ubaid Ur Rehman, and Hamza Khan.
 
 Built with Next.js App Router, TypeScript, Tailwind CSS, and Framer Motion.
 
 ---
+
+## RoveTech brand & theme
+
+- **Logo files:** `public/brand/` (`logo-mark.png`, `logo-wordmark.png`, `logo-full.png`, favicon and app icons). Social preview image: `public/images/og/og-default.png`.
+- **Colors:** all theme colors live in `app/globals.css` under `@theme` (void `#03070b`, surface, accent cyan `#19d3e8`, etc.). Change them there and the whole site follows.
+- **Effects:** HUD grid + aurora background (`.world`), glass cards (`.hud`), neon text (`.text-neon`), scroll bar and cursor glow (`components/layout/Effects.tsx`).
+- **Placeholders to replace before launch:** domain, email, phone, address, social links (`lib/site.ts`), team bios, case-study images.
 
 ## 1. Tech stack
 

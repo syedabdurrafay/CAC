@@ -72,21 +72,21 @@ export default async function ServiceDetailPage({
       {/* Hero */}
       <section className="border-b border-line py-16 md:py-24">
         <Container>
-          <p className="text-sm font-medium text-current">{service.category}</p>
+          <p className="text-sm font-medium text-accent">{service.category}</p>
           <div className="mt-3 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <h1 className="font-display max-w-2xl text-balance text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl">
+            <h1 className="font-display max-w-2xl text-balance text-4xl font-medium leading-[1.05] tracking-tight text-fg sm:text-5xl">
               {service.title}
             </h1>
             {service.heroStat && (
               <div className="shrink-0 border-l border-line pl-6">
-                <p className="font-display text-3xl font-medium text-ink">
+                <p className="font-display text-3xl font-medium text-fg">
                   {service.heroStat.value}
                 </p>
-                <p className="text-sm text-ink-soft/60">{service.heroStat.label}</p>
+                <p className="text-sm text-fg-soft/60">{service.heroStat.label}</p>
               </div>
             )}
           </div>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft/80">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-fg-soft/80">
             {service.description}
           </p>
           <div className="mt-8">
@@ -99,18 +99,18 @@ export default async function ServiceDetailPage({
       <section className="border-b border-line py-16 md:py-20">
         <Container className="grid grid-cols-1 gap-10 md:grid-cols-2">
           <Reveal>
-            <h2 className="font-display text-2xl font-medium text-ink">
+            <h2 className="font-display text-2xl font-medium text-fg">
               The problem
             </h2>
-            <p className="mt-3 leading-relaxed text-ink-soft/80">
+            <p className="mt-3 leading-relaxed text-fg-soft/80">
               {service.problem}
             </p>
           </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="font-display text-2xl font-medium text-ink">
+            <h2 className="font-display text-2xl font-medium text-fg">
               Our approach
             </h2>
-            <p className="mt-3 leading-relaxed text-ink-soft/80">
+            <p className="mt-3 leading-relaxed text-fg-soft/80">
               {service.solution}
             </p>
           </Reveal>
@@ -121,25 +121,25 @@ export default async function ServiceDetailPage({
       <section className="border-b border-line py-16 md:py-20">
         <Container className="grid grid-cols-1 gap-10 md:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl font-medium text-ink">
+            <h2 className="font-display text-2xl font-medium text-fg">
               What you get
             </h2>
             <ul className="mt-5 space-y-3">
               {service.benefits.map((benefit) => (
-                <li key={benefit} className="flex items-start gap-3 text-ink-soft/85">
-                  <Check size={18} className="mt-0.5 shrink-0 text-current" />
+                <li key={benefit} className="flex items-start gap-3 text-fg-soft/85">
+                  <Check size={18} className="mt-0.5 shrink-0 text-accent" />
                   <span>{benefit}</span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h2 className="font-display text-2xl font-medium text-ink">
+            <h2 className="font-display text-2xl font-medium text-fg">
               Deliverables
             </h2>
             <ul className="mt-5 space-y-3">
               {service.deliverables.map((item) => (
-                <li key={item} className="border-b border-line pb-3 text-ink-soft/85 last:border-b-0">
+                <li key={item} className="border-b border-line pb-3 text-fg-soft/85 last:border-b-0">
                   {item}
                 </li>
               ))}
@@ -151,17 +151,17 @@ export default async function ServiceDetailPage({
       {/* Process */}
       <section className="border-b border-line py-16 md:py-20">
         <Container>
-          <h2 className="font-display text-2xl font-medium text-ink">
+          <h2 className="font-display text-2xl font-medium text-fg">
             How we run it
           </h2>
           <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {service.process.map((step, i) => (
-              <div key={step.title} className="border-t border-ink/15 pt-4">
-                <span className="text-sm text-ink-soft/50">0{i + 1}</span>
-                <h3 className="font-display mt-1 text-lg font-medium text-ink">
+              <div key={step.title} className="border-t border-fg/15 pt-4">
+                <span className="text-sm text-fg-soft/50">0{i + 1}</span>
+                <h3 className="font-display mt-1 text-lg font-medium text-fg">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft/75">
+                <p className="mt-2 text-sm leading-relaxed text-fg-soft/75">
                   {step.description}
                 </p>
               </div>
@@ -173,7 +173,7 @@ export default async function ServiceDetailPage({
       {/* FAQ */}
       <section className="border-b border-line py-16 md:py-20">
         <Container>
-          <h2 className="font-display text-2xl font-medium text-ink">
+          <h2 className="font-display text-2xl font-medium text-fg">
             Frequently asked questions
           </h2>
           <div className="mt-8">
@@ -186,7 +186,7 @@ export default async function ServiceDetailPage({
       {related.length > 0 && (
         <section className="border-b border-line py-16 md:py-20">
           <Container>
-            <h2 className="font-display text-2xl font-medium text-ink">
+            <h2 className="font-display text-2xl font-medium text-fg">
               Related services
             </h2>
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -194,12 +194,12 @@ export default async function ServiceDetailPage({
                 <Link
                   key={r.slug}
                   href={`/services/${r.slug}`}
-                  className="group flex items-center justify-between rounded-[var(--radius-md)] border border-line bg-white px-5 py-4"
+                  className="group flex items-center justify-between hud rounded-[var(--radius-md)] border border-line bg-surface px-5 py-4"
                 >
-                  <span className="text-sm font-medium text-ink">{r.title}</span>
+                  <span className="text-sm font-medium text-fg">{r.title}</span>
                   <ArrowUpRight
                     size={16}
-                    className="text-ink-soft/50 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    className="text-fg-soft/50 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   />
                 </Link>
               ))}
@@ -211,7 +211,7 @@ export default async function ServiceDetailPage({
       {/* CTA */}
       <section className="py-16 md:py-20">
         <Container className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <h2 className="font-display max-w-xl text-balance text-3xl font-medium leading-tight text-ink sm:text-4xl">
+          <h2 className="font-display max-w-xl text-balance text-3xl font-medium leading-tight text-fg sm:text-4xl">
             Ready to talk about {service.title.toLowerCase()}?
           </h2>
           <ButtonLink href="/contact" className="shrink-0">

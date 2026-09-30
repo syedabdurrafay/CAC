@@ -50,13 +50,13 @@ export default function PrivacyPage() {
       <section className="py-16 md:py-20">
         <Container>
           <div className="mx-auto max-w-2xl space-y-10">
-            <p className="text-sm text-ink-soft/60">Last updated: January 1, 2026</p>
+            <p className="text-sm text-fg-soft/60">Last updated: January 1, 2026</p>
             {sections.map((section) => (
               <div key={section.title}>
-                <h2 className="font-display text-xl font-medium text-ink">
+                <h2 className="font-display text-xl font-medium text-fg">
                   {section.title}
                 </h2>
-                <p className="mt-3 leading-relaxed text-ink-soft/80">{section.body}</p>
+                <p className="mt-3 leading-relaxed text-fg-soft/80">{section.body}</p>
               </div>
             ))}
           </div>

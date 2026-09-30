@@ -1,44 +1,43 @@
 @import "tailwindcss";
 
 /* ============================================================
-   DESIGN TOKENS
-   Single source of truth for color, radius, and motion values.
+   ROVETECH DESIGN SYSTEM — "2060" THEME
+   Palette is sampled from the RoveTech logo: deep void black,
+   electric cyan and a teal shadow tone.
+   Token names:
+     void      page background          fg        primary text
+     surface   glass panels / cards     fg-soft   secondary text
+     surface-2 raised panels            accent    RoveTech cyan
    ============================================================ */
-:root {
-  --color-ink: #14151a;
-  --color-ink-soft: #2b2c33;
-  --color-paper: #f6f5f1;
-  --color-paper-dim: #ece9e1;
-  --color-white: #ffffff;
-  --color-current: #3644ff;
-  --color-current-dim: #d9deff;
-  --color-line: #dedbd1;
-  --color-line-dark: #34353d;
+@theme {
+  --color-void: #03070b;
+  --color-surface: #08131b;
+  --color-surface-2: #0c1d28;
+  --color-fg: #e9f8fc;
+  --color-fg-soft: #9dbdca;
+  --color-accent: #19d3e8;
+  --color-accent-bright: #7feaf2;
+  --color-accent-deep: #0a6f86;
+  --color-accent-dim: #0b2f3a;
+  --color-line: #143240;
+  --color-line-bright: #1f5566;
 
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
-
-  --container-max: 1280px;
-
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@theme inline {
-  --color-ink: var(--color-ink);
-  --color-ink-soft: var(--color-ink-soft);
-  --color-paper: var(--color-paper);
-  --color-paper-dim: var(--color-paper-dim);
-  --color-white: var(--color-white);
-  --color-current: var(--color-current);
-  --color-current-dim: var(--color-current-dim);
-  --color-line: var(--color-line);
-  --color-line-dark: var(--color-line-dark);
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
 
   --font-display: "Space Grotesk", sans-serif;
   --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --breakpoint-xs: 30rem;
+}
+
+:root {
+  color-scheme: dark;
+  --container-max: 1280px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --glow: 0 0 24px rgba(25, 211, 232, 0.35);
 }
 
 * {
@@ -47,30 +46,77 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--color-void);
 }
 
 body {
-  background: var(--color-paper);
-  color: var(--color-ink);
+  position: relative;
+  background: transparent;
+  color: var(--color-fg);
   font-family: var(--font-sans), sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+/* ---------- Ambient world behind every page ---------- */
+.world {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 55% at 78% -10%, rgba(25, 211, 232, 0.16), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 0% 100%, rgba(10, 111, 134, 0.22), transparent 60%),
+    var(--color-void);
+}
+.world::before {
+  /* HUD grid */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(25, 211, 232, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(25, 211, 232, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 85%);
+}
+.world::after {
+  /* drifting aurora */
+  content: "";
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  left: -20vmax;
+  top: 30vh;
+  background: radial-gradient(circle, rgba(25, 211, 232, 0.10), transparent 65%);
+  filter: blur(40px);
+  animation: aurora 26s ease-in-out infinite alternate;
+}
+@keyframes aurora {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(70vw, -20vh, 0) scale(1.25); }
+}
+
 ::selection {
-  background: var(--color-current);
-  color: var(--color-white);
+  background: var(--color-accent);
+  color: var(--color-void);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-current);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-void); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-line-bright);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent-deep); }
+
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
   *,
   *::before,
   *::after {
@@ -88,36 +134,95 @@ body {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
-
 @media (min-width: 768px) {
-  .container-max {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
+  .container-max { padding-left: 2.5rem; padding-right: 2.5rem; }
 }
 
-.text-balance {
-  text-wrap: balance;
+.text-balance { text-wrap: balance; }
+
+/* ---------- Futuristic utilities ---------- */
+
+/* Neon gradient text, sampled from the logo ribbon */
+.text-neon {
+  background: linear-gradient(100deg, #19d3e8 0%, #7feaf2 50%, #19d3e8 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
 }
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* HUD label: small mono caps used for eyebrows and meta text */
+.hud-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Glass card with glowing corner brackets */
+.hud {
+  position: relative;
+  background:
+    linear-gradient(160deg, rgba(25, 211, 232, 0.07), rgba(25, 211, 232, 0.01) 45%),
+    var(--color-surface);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+.hud::before,
+.hud::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--color-accent);
+  opacity: 0.55;
+  transition: opacity 0.3s, width 0.3s var(--ease-out), height 0.3s var(--ease-out);
+  pointer-events: none;
+}
+.hud::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-top-left-radius: var(--radius-md); }
+.hud::after  { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-bottom-right-radius: var(--radius-md); }
+.hud:hover {
+  border-color: var(--color-line-bright);
+  box-shadow: 0 0 0 1px rgba(25, 211, 232, 0.15), 0 24px 60px -24px rgba(25, 211, 232, 0.35);
+}
+.hud:hover::before,
+.hud:hover::after { opacity: 1; width: 22px; height: 22px; }
+
+/* Scanline sweep: put <span class="scanline" /> inside a relative, overflow-hidden parent */
+.scanline {
+  position: absolute;
+  left: 0; right: 0; top: -30%;
+  height: 30%;
+  background: linear-gradient(to bottom, transparent, rgba(25, 211, 232, 0.10), transparent);
+  animation: scan 7s linear infinite;
+  pointer-events: none;
+}
+@keyframes scan { to { top: 130%; } }
+
+/* Orbit rings */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes spin-rev  { to { transform: rotate(-360deg); } }
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.animate-spin-slow { animation: spin-slow 40s linear infinite; }
+.animate-spin-rev  { animation: spin-rev 60s linear infinite; }
+.animate-float     { animation: float-y 6s ease-in-out infinite; }
+
+/* Marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
-
+.animate-marquee { animation: marquee 35s linear infinite; }
 .marquee-mask {
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
-
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee { animation: none; }
+  .scanline, .animate-marquee, .animate-spin-slow, .animate-spin-rev, .animate-float { animation: none; }
 }

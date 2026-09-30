@@ -47,14 +47,14 @@ export function Process() {
         <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((step, i) => (
             <Reveal key={step.number} delay={i * 0.05}>
-              <div className="border-t border-ink/15 pt-5">
-                <span className="font-display text-sm text-ink-soft/50">
+              <div className="border-t border-fg/15 pt-5">
+                <span className="font-display text-sm text-fg-soft/50">
                   {step.number}
                 </span>
-                <h3 className="font-display mt-2 text-xl font-medium text-ink">
+                <h3 className="font-display mt-2 text-xl font-medium text-fg">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft/75">
+                <p className="mt-2 text-sm leading-relaxed text-fg-soft/75">
                   {step.description}
                 </p>
               </div>

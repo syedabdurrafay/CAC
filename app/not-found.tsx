@@ -10,11 +10,11 @@ export default function NotFound() {
   return (
     <section className="flex min-h-[70vh] items-center py-16">
       <Container className="text-center">
-        <p className="font-display text-sm font-medium text-current">404</p>
-        <h1 className="font-display mt-3 text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+        <p className="font-display text-sm font-medium text-accent">404</p>
+        <h1 className="font-display mt-3 text-4xl font-medium tracking-tight text-fg sm:text-5xl">
           This page doesn&apos;t exist.
         </h1>
-        <p className="mx-auto mt-4 max-w-md text-ink-soft/75">
+        <p className="mx-auto mt-4 max-w-md text-fg-soft/75">
           The page you&apos;re looking for may have been moved or never existed.
           Head back home, or explore our services.
         </p>

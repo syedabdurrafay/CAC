@@ -24,12 +24,12 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
               aria-expanded={isOpen}
               aria-controls={`faq-panel-${index}`}
             >
-              <span className="font-display text-base font-medium text-ink sm:text-lg">
+              <span className="font-display text-base font-medium text-fg sm:text-lg">
                 {item.question}
               </span>
               <Plus
                 size={18}
-                className={`shrink-0 text-ink-soft/60 transition-transform duration-200 ${
+                className={`shrink-0 text-fg-soft/60 transition-transform duration-200 ${
                   isOpen ? "rotate-45" : ""
                 }`}
               />
@@ -44,7 +44,7 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
                   transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="pb-6 max-w-2xl text-sm leading-relaxed text-ink-soft/75">
+                  <p className="pb-6 max-w-2xl text-sm leading-relaxed text-fg-soft/75">
                     {item.answer}
                   </p>
                 </motion.div>

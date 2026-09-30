@@ -44,22 +44,22 @@ export default async function WorkDetailPage({
       <section className="border-b border-line py-16 md:py-20">
         <Container>
           {project.isPlaceholder && (
-            <p className="mb-4 inline-block rounded-[var(--radius-sm)] border border-current bg-current-dim px-3 py-1 text-xs font-medium text-current">
+            <p className="mb-4 inline-block rounded-[var(--radius-sm)] border border-accent bg-accent-dim px-3 py-1 text-xs font-medium text-accent">
               Placeholder case study — pending real client data
             </p>
           )}
-          <p className="text-sm font-medium text-current">{project.industry}</p>
-          <h1 className="font-display mt-3 max-w-2xl text-balance text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl">
+          <p className="text-sm font-medium text-accent">{project.industry}</p>
+          <h1 className="font-display mt-3 max-w-2xl text-balance text-4xl font-medium leading-[1.05] tracking-tight text-fg sm:text-5xl">
             {project.name}
           </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft/80">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-fg-soft/80">
             {project.summary}
           </p>
         </Container>
       </section>
 
       <section className="border-b border-line">
-        <div className="relative aspect-[16/7] w-full bg-paper-dim">
+        <div className="relative aspect-[16/7] w-full bg-surface-2">
           <Image
             src={project.image}
             alt={`${project.name} case study cover`}
@@ -73,18 +73,18 @@ export default async function WorkDetailPage({
       <section className="border-b border-line py-16 md:py-20">
         <Container className="grid grid-cols-1 gap-10 md:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl font-medium text-ink">
+            <h2 className="font-display text-2xl font-medium text-fg">
               The challenge
             </h2>
-            <p className="mt-3 leading-relaxed text-ink-soft/80">
+            <p className="mt-3 leading-relaxed text-fg-soft/80">
               {project.challenge}
             </p>
           </div>
           <div>
-            <h2 className="font-display text-2xl font-medium text-ink">
+            <h2 className="font-display text-2xl font-medium text-fg">
               The approach
             </h2>
-            <p className="mt-3 leading-relaxed text-ink-soft/80">
+            <p className="mt-3 leading-relaxed text-fg-soft/80">
               {project.solutionText}
             </p>
           </div>
@@ -93,14 +93,14 @@ export default async function WorkDetailPage({
 
       <section className="border-b border-line py-16 md:py-20">
         <Container>
-          <h2 className="font-display text-2xl font-medium text-ink">Results</h2>
+          <h2 className="font-display text-2xl font-medium text-fg">Results</h2>
           <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-4">
             {project.results.map((result) => (
               <div key={result.label}>
-                <p className="font-display text-3xl font-medium text-ink">
+                <p className="font-display text-3xl font-medium text-fg">
                   {result.value}
                 </p>
-                <p className="mt-1 text-sm text-ink-soft/60">{result.label}</p>
+                <p className="mt-1 text-sm text-fg-soft/60">{result.label}</p>
               </div>
             ))}
           </div>
@@ -109,7 +109,7 @@ export default async function WorkDetailPage({
 
       <section className="border-b border-line py-16 md:py-20">
         <Container>
-          <h2 className="font-display text-2xl font-medium text-ink">
+          <h2 className="font-display text-2xl font-medium text-fg">
             Services used
           </h2>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -117,7 +117,7 @@ export default async function WorkDetailPage({
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="rounded-[var(--radius-sm)] border border-line bg-white px-4 py-2 text-sm font-medium text-ink hover:border-ink/40"
+                className="rounded-[var(--radius-sm)] border border-line bg-surface px-4 py-2 text-sm font-medium text-fg hover:border-accent/60 hover:text-accent"
               >
                 {service.title}
               </Link>
@@ -128,7 +128,7 @@ export default async function WorkDetailPage({
 
       <section className="py-16 md:py-20">
         <Container className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <h2 className="font-display max-w-xl text-balance text-3xl font-medium leading-tight text-ink sm:text-4xl">
+          <h2 className="font-display max-w-xl text-balance text-3xl font-medium leading-tight text-fg sm:text-4xl">
             Want results like this for your brand?
           </h2>
           <ButtonLink href="/contact" className="shrink-0">

@@ -24,7 +24,7 @@ export function InsightsPreview() {
           {insights.slice(0, 3).map((post, i) => (
             <Reveal key={post.slug} delay={i * 0.08}>
               <Link href={`/insights/${post.slug}`} className="group block">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-md)] border border-line bg-paper-dim">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-md)] border border-line bg-surface-2">
                   <Image
                     src={post.image}
                     alt=""
@@ -33,10 +33,10 @@ export function InsightsPreview() {
                     className="object-cover transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-[1.03]"
                   />
                 </div>
-                <p className="mt-4 text-xs font-medium text-ink-soft/50">
+                <p className="mt-4 text-xs font-medium text-fg-soft/50">
                   {post.category} in {post.readTime}
                 </p>
-                <h3 className="font-display mt-2 text-lg font-medium leading-snug text-ink">
+                <h3 className="font-display mt-2 text-lg font-medium leading-snug text-fg">
                   {post.title}
                 </h3>
               </Link>

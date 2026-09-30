@@ -8,7 +8,7 @@ import { insights } from "@/lib/insights";
 export const metadata: Metadata = {
   title: "Insights",
   description:
-    "Notes from the Northfield team on search, paid media, and owned media performance.",
+    "Notes from the RoveTech team on search, paid media, and owned media performance.",
 };
 
 export default function InsightsPage() {
@@ -24,7 +24,7 @@ export default function InsightsPage() {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
             {insights.map((post) => (
               <Link key={post.slug} href={`/insights/${post.slug}`} className="group block">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-md)] border border-line bg-paper-dim">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-md)] border border-line bg-surface-2">
                   <Image
                     src={post.image}
                     alt=""
@@ -33,13 +33,13 @@ export default function InsightsPage() {
                     className="object-cover transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-[1.03]"
                   />
                 </div>
-                <p className="mt-4 text-xs font-medium text-ink-soft/50">
+                <p className="mt-4 text-xs font-medium text-fg-soft/50">
                   {post.category} in {post.readTime}
                 </p>
-                <h2 className="font-display mt-2 text-lg font-medium leading-snug text-ink">
+                <h2 className="font-display mt-2 text-lg font-medium leading-snug text-fg">
                   {post.title}
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft/75">
+                <p className="mt-2 text-sm leading-relaxed text-fg-soft/75">
                   {post.excerpt}
                 </p>
               </Link>
